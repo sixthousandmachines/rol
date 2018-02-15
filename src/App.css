@@ -1,3 +1,14 @@
+body {
+  background-color: #222;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 .App {
   text-align: center;
 }
@@ -8,7 +19,6 @@
 }
 
 .App-header {
-  background-color: #222;
   height: 85px;
   padding: 20px;
   color: #444;
