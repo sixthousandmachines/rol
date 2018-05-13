@@ -1,6 +1,9 @@
 
 
 .playlist-item {
+    width: 100%;
+    margin: 12px;
+    padding: 12px;
     display: inline-block;
     text-decoration: none;
     color: #999;
@@ -9,11 +12,11 @@
     padding: 20px 70px;
     font-size: 24px;
     border: 1px solid #900;
-    background-image: linear-gradient(bottom, #444 0%, #222 100%);
-    background-image: -o-linear-gradient(bottom, #444 0%, #222 100%);
-    background-image: -moz-linear-gradient(bottom, #444 0%, #222 100%);
-    background-image: -webkit-linear-gradient(bottom, #444 0%, #222 100%);
-    background-image: -ms-linear-gradient(bottom, #444 0%, #222 100%);
+    background-image: linear-gradient(to bottom, #444 0%, #222 100%);
+    background-image: -o-linear-gradient(to bottom, #444 0%, #222 100%);
+    background-image: -moz-linear-gradient(to bottom, #444 0%, #222 100%);
+    background-image: -webkit-linear-gradient(to bottom, #444 0%, #222 100%);
+    background-image: -ms-linear-gradient(to bottom, #444 0%, #222 100%);
 
     background-image: -webkit-gradient(
         linear,
@@ -44,11 +47,11 @@
 .playlist-item:active {
     color: #900;
     border-color: black;
-    background-image: linear-gradient(bottom, #999 0%, #900 100%);
-    background-image: -o-linear-gradient(bottom, #999 0%, #900 100%);
-    background-image: -moz-linear-gradient(bottom, #999 0%, #900 100%);
-    background-image: -webkit-linear-gradient(bottom, #999 0%, #900 100%);
-    background-image: -ms-linear-gradient(bottom, #999 0%, #900 100%);
+    background-image: linear-gradient(to bottom, #999 0%, #900 100%);
+    background-image: -o-linear-gradient(to bottom, #999 0%, #900 100%);
+    background-image: -moz-linear-gradient(to bottom, #999 0%, #900 100%);
+    background-image: -webkit-linear-gradient(to bottom, #999 0%, #900 100%);
+    background-image: -ms-linear-gradient(to bottom, #999 0%, #900 100%);
 
     background-image: -webkit-gradient(
         linear,
