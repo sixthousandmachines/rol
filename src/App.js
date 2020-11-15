@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 // import logo from './biohazard.gif'
-import Nav from './Nav'
-import Playlist from './Playlist'
-import Player from './Player'
-import Store from './Store'
-import './Player.css'
-import './Playlist.css'
+import { Nav } from './components/Nav/Nav'
+import { Playlist } from './components/Playlist/Playlist'
+import { Player } from './components/Player/Player'
+import Store from './stores/Store'
 import './App.css'
 
 let self
 
 class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onSelect = this.onSelect.bind(this)
     this.state = {
