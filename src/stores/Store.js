@@ -3,9 +3,8 @@ import { ListObjectsCommand, S3Client } from '@aws-sdk/client-s3'
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-provider-cognito-identity'
 import _ from 'lodash'
 
-
 class Store {
-  constructor() {
+  constructor () {
     const region = 'us-east-1'
 
     this.subscriptions = []
@@ -25,11 +24,11 @@ class Store {
     this.getNavItems()
   }
 
-  getPage() {
+  getPage () {
     return this.page
   }
 
-  async getNavItems() {
+  async getNavItems () {
     try {
       const response = await this.client.send(this.cmd)
       this.catalog = _.map(response.Contents, item => item.Key)
@@ -39,13 +38,13 @@ class Store {
     }
   }
 
-  buildPage() {
+  buildPage () {
     const djNames = _.map(this.catalog, item => item.substring(0, item.indexOf('/')))
     this.page.navItems = _.uniq(djNames)
     setTimeout(this.publish(), 0)
   }
 
-  buildCard(item) {
+  buildCard (item) {
     const trackName = item.substring(item.indexOf('/') + 1)
 
     if (!trackName) return null
@@ -58,25 +57,25 @@ class Store {
     }
   }
 
-  setArtist(id) {
+  setArtist (id) {
     this.page.navSelected = id
     this.page.playlist = _.compact(_.map(_.filter(this.catalog, item => _.startsWith(item, id)), this.buildCard))
     this.buildPage()
   }
 
-  setSelection(id) {
+  setSelection (id) {
     this.page.trackSelected = id
     this.page.playerlist = [_.find(this.page.playlist, item => item.id === id)]
     this.buildPage()
   }
 
-  publish(list) {
+  publish (list) {
     _.forEach(this.subscriptions, subscription => {
       setTimeout(subscription.callback(this.page), 0)
     })
   }
 
-  subscribe(key, callback) {
+  subscribe (key, callback) {
     let existing = _.find(this.subscribtions, subscription => subscription.key === key)
     if (existing) {
       existing = callback
@@ -85,7 +84,7 @@ class Store {
     }
   }
 
-  unsubscribe(key) {
+  unsubscribe (key) {
     _.remove(this.subscriptions, subscription => subscription.key === key)
   }
 }
