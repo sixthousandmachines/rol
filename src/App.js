@@ -9,7 +9,7 @@ import Store from './stores/Store'
 let self
 
 class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onSelect = this.onSelect.bind(this)
     this.state = {
@@ -18,36 +18,36 @@ class App extends Component {
     self = this
   }
 
-  componentDidMount () {
+  componentDidMount() {
     Store.subscribe('APP', this.onSelectCallback)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     Store.unsubscribe('APP')
   }
 
-  onNavigation (e) {
+  onNavigation(e) {
     Store.setArtist(e)
   }
 
-  onSelect (e) {
+  onSelect(e) {
     Store.setSelection(e)
   }
 
-  onSelectCallback (page) {
+  onSelectCallback(page) {
     self.setState({
       page
     })
   }
 
-  render () {
+  render() {
     return (
       <div className='App'>
         {/* <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
         </header> */}
         <Nav navItems={self.state.page.navItems} selected={self.state.page.navSelected} handleSelect={self.onNavigation} />
-        <Playlist playlist={self.state.page.playlist} handleSelect={self.onSelect} />
+        <Playlist playlist={self.state.page.playlist} selected={self.state.page.trackSelected} handleSelect={self.onSelect} />
         <Player playerlist={self.state.page.playerlist} />
       </div>
     )

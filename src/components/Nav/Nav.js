@@ -3,18 +3,16 @@ import React from 'react'
 import './Nav.css'
 
 export const Nav = ({ navItems, selected, handleSelect }) => {
-  let computedClass = 'nav-link'
+  let defaultClass = 'nav-item'
   return (
     <div className='App-nav'>
       <div className='container'>
         <ul className='nav nav-pills nav-fill'>
           {navItems.map((name, index) => {
-            if (name === selected) {
-              computedClass += ' active'
-            }
+            const computedClass = name === selected ? defaultClass + ' nav-item-active' : defaultClass
             return (
-              <li key={index} className='nav-item'>
-                <button key={index} id={name} className={computedClass} onClick={() => handleSelect(name)}>{name}</button>
+              <li key={index} className={computedClass} onClick={() => handleSelect(name)} >
+                <label key={index} id={name} >{name}</label>
               </li>
             )
           })}

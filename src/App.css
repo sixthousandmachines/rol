@@ -35,6 +35,14 @@ button:focus {
   font-size: large;
 }
 
+.App-playlist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  text-align: center;
+}
+
 .App-player {
   background-color: #222;
   position: absolute;

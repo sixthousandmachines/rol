@@ -1,16 +1,16 @@
 
 
 .playlist-item {
-    width: 100%;
+    width: 600px;
     margin: 12px;
     padding: 12px;
-    display: inline-block;
     text-decoration: none;
+    text-align: center;
     color: #999;
     font-weight: bold;
     background-color: #444;
     padding: 20px 70px;
-    font-size: 24px;
+    font-size: 18px;
     border: 1px solid #900;
     background-image: linear-gradient(to bottom, #444 0%, #222 100%);
     background-image: -o-linear-gradient(to bottom, #444 0%, #222 100%);
@@ -53,6 +53,22 @@
     background-image: -webkit-linear-gradient(to bottom, #999 0%, #900 100%);
     background-image: -ms-linear-gradient(to bottom, #999 0%, #900 100%);
 
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, #999),
+        color-stop(1, #900)
+    );
+}
+
+.playlist-item-title {
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+.playlist-item-active {
     background-image: -webkit-gradient(
         linear,
         left bottom,

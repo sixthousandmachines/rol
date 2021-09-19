@@ -11,7 +11,7 @@ class Store {
     this.subscriptions = []
     this.catalog = []
     this.page = {
-      navItems: [], // _.map(catalog, 'name'),
+      navItems: [],
       navSelected: '',
       playlist: [],
       playerlist: []

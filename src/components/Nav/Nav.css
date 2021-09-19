@@ -59,3 +59,13 @@
       color-stop(1, #900)
   );
 }
+
+.nav-item-active {
+  background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0, #999),
+      color-stop(1, #900)
+  );
+}
