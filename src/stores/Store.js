@@ -1,9 +1,13 @@
+import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
 import { ListObjectsCommand, S3Client } from '@aws-sdk/client-s3'
-import { fromIni } from '@aws-sdk/credential-provider-ini'
+import { fromCognitoIdentityPool } from '@aws-sdk/credential-provider-cognito-identity'
 import _ from 'lodash'
+
 
 class Store {
   constructor() {
+    const region = 'us-east-1'
+
     this.subscriptions = []
     this.catalog = []
     this.page = {
@@ -12,8 +16,11 @@ class Store {
       playlist: [],
       playerlist: []
     }
-    this.cred = fromIni({})
-    this.client = new S3Client({ credentials: { accessKeyId: 'AKIAQFWKIYXT32P3DB55', secretAccessKey: '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' }, region: 'us-east-1' })
+    this.cred = fromCognitoIdentityPool({
+      client: new CognitoIdentityClient({ region }),
+      identityPoolId: 'us-east-1:d78ad54c-3a62-4e9a-9549-f203580ba151'
+    })
+    this.client = new S3Client({ credentials: this.cred, region })
     this.cmd = new ListObjectsCommand({ Bucket: 'media.rideoutlane.com' })
     this.getNavItems()
   }
