@@ -2,14 +2,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import './Playlist.css'
 
-export const Playlist = ({ playlist, onSelect }) => {
+export const Playlist = ({ playlist, handleSelect }) => {
   return (
     <div className='App-playlist'>
       <div className='container'>
         {playlist.map((item, index) => {
           return (
             <div key={index} className='row'>
-              <button key={index} id={item.id} className='playlist-item' onClick={() => onSelect(item.id)}>{item.displayText}</button>
+              <button key={index} id={item.id} className='playlist-item' onClick={() => handleSelect(item.id)}>{item.displayText}</button>
             </div>
           )
         })}
@@ -20,5 +20,5 @@ export const Playlist = ({ playlist, onSelect }) => {
 
 Playlist.propTypes = {
   playlist: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired
 }

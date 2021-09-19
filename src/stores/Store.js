@@ -1,95 +1,85 @@
+import { ListObjectsCommand, S3Client } from '@aws-sdk/client-s3'
+import { fromIni } from '@aws-sdk/credential-provider-ini'
 import _ from 'lodash'
 
-const catalog = [{
-  id: 1,
-  name: 'ROL',
-  playlist: [{
-    id: 1,
-    url: 'http://media.rideoutlane.com/decksimus_&_cubanb__live@myth_20170101.mp3',
-    displayText: 'Live @ Myth',
-    selected: false
-  },
-  {
-    id: 2,
-    url: 'http://media.rideoutlane.com/club/radio_rehab_uncut_mix.mp3',
-    displayText: 'Radio Rehab',
-    selected: false
-  }]
-},
-{
-  id: 2,
-  name: 'thPranksta',
-  playlist: [{
-    id: 1,
-    url: 'http://media.rideoutlane.com/thpranksta/thpranksta__lbd25.mp3',
-    displayText: 'LBD25',
-    selected: false
-  }]
-},
-{
-  id: 3,
-  name: 'Decksimus',
-  playlist: [{
-    id: 1,
-    url: 'http://media.rideoutlane.com/decksimus__rideout.mp3',
-    displayText: 'Rideout',
-    selected: false
-  },
-  {
-    id: 2,
-    url: 'http://media.rideoutlane.com/decksimus__guerilla_warfunk.mp3',
-    displayText: 'Guerilla Warfunk',
-    selected: false
-  }]
-}]
-
-let subscriptions
-let page
-
 class Store {
-  constructor () {
-    subscriptions = []
-    page = {
-      navItems: _.map(catalog, 'name'),
+  constructor() {
+    this.subscriptions = []
+    this.catalog = []
+    this.page = {
+      navItems: [], // _.map(catalog, 'name'),
       navSelected: '',
       playlist: [],
       playerlist: []
     }
+    this.cred = fromIni({})
+    this.client = new S3Client({ credentials: { accessKeyId: 'AKIAQFWKIYXT32P3DB55', secretAccessKey: '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' }, region: 'us-east-1' })
+    this.cmd = new ListObjectsCommand({ Bucket: 'media.rideoutlane.com' })
+    this.getNavItems()
   }
 
-  getPage () {
-    return page
+  getPage() {
+    return this.page
   }
 
-  setArtist (id) {
-    page.navSelected = id
-    page.playlist = _.find(catalog, item => item.name === id).playlist
+  async getNavItems() {
+    try {
+      const response = await this.client.send(this.cmd)
+      this.catalog = _.map(response.Contents, item => item.Key)
+      this.buildPage()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  buildPage() {
+    const djNames = _.map(this.catalog, item => item.substring(0, item.indexOf('/')))
+    this.page.navItems = _.uniq(djNames)
     setTimeout(this.publish(), 0)
   }
 
-  setSelection (id) {
-    page.trackSelected = id
-    page.playerlist = [_.find(page.playlist, item => item.id === id)]
-    setTimeout(this.publish(), 0)
+  buildCard(item) {
+    const trackName = item.substring(item.indexOf('/') + 1)
+
+    if (!trackName) return null
+
+    return {
+      id: item,
+      url: 'http://media.rideoutlane.com/' + item,
+      displayText: trackName,
+      selected: false
+    }
   }
 
-  publish (list) {
-    _.forEach(subscriptions, subscription => {
-      setTimeout(subscription.callback(page), 0)
+  setArtist(id) {
+    this.page.navSelected = id
+    this.page.playlist = _.compact(_.map(_.filter(this.catalog, item => _.startsWith(item, id)), this.buildCard))
+    this.buildPage()
+  }
+
+  setSelection(id) {
+    this.page.trackSelected = id
+    this.page.playerlist = [_.find(this.page.playlist, item => item.id === id)]
+    this.buildPage()
+  }
+
+  publish(list) {
+    _.forEach(this.subscriptions, subscription => {
+      setTimeout(subscription.callback(this.page), 0)
     })
   }
 
-  subscribe (key, callback) {
+  subscribe(key, callback) {
     let existing = _.find(this.subscribtions, subscription => subscription.key === key)
     if (existing) {
       existing = callback
     } else {
-      subscriptions.push({ key, callback })
+      this.subscriptions.push({ key, callback })
     }
   }
 
-  unsubscribe (key) {
-    _.remove(subscriptions, subscription => subscription.key === key)
+  unsubscribe(key) {
+    _.remove(this.subscriptions, subscription => subscription.key === key)
   }
 }
 

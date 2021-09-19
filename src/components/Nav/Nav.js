@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import './Nav.css'
 
-export const Nav = ({ navItems, selected, onSelect }) => {
+export const Nav = ({ navItems, selected, handleSelect }) => {
   let computedClass = 'nav-link'
   return (
     <div className='App-nav'>
@@ -14,7 +14,7 @@ export const Nav = ({ navItems, selected, onSelect }) => {
             }
             return (
               <li key={index} className='nav-item'>
-                <button key={index} id={name} className={computedClass} onClick={() => onSelect(name)}>{name}</button>
+                <button key={index} id={name} className={computedClass} onClick={() => handleSelect(name)}>{name}</button>
               </li>
             )
           })}
@@ -27,5 +27,5 @@ export const Nav = ({ navItems, selected, onSelect }) => {
 Nav.propTypes = {
   navItems: PropTypes.array.isRequired,
   selected: PropTypes.string.isRequired,
-  onSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired
 }
