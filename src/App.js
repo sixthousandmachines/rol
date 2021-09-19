@@ -9,7 +9,7 @@ import './App.css'
 let self
 
 class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.onSelect = this.onSelect.bind(this)
     this.state = {
