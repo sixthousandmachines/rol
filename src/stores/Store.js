@@ -1,9 +1,9 @@
 import _ from 'lodash'
 
-let catalog = [{
-  'id': 1,
-  'name': 'ROL',
-  'playlist': [{
+const catalog = [{
+  id: 1,
+  name: 'ROL',
+  playlist: [{
     id: 1,
     url: 'http://media.rideoutlane.com/decksimus_&_cubanb__live@myth_20170101.mp3',
     displayText: 'Live @ Myth',
@@ -17,9 +17,9 @@ let catalog = [{
   }]
 },
 {
-  'id': 2,
-  'name': 'thPranksta',
-  'playlist': [{
+  id: 2,
+  name: 'thPranksta',
+  playlist: [{
     id: 1,
     url: 'http://media.rideoutlane.com/thpranksta/thpranksta__lbd25.mp3',
     displayText: 'LBD25',
@@ -27,9 +27,9 @@ let catalog = [{
   }]
 },
 {
-  'id': 3,
-  'name': 'Decksimus',
-  'playlist': [{
+  id: 3,
+  name: 'Decksimus',
+  playlist: [{
     id: 1,
     url: 'http://media.rideoutlane.com/decksimus__rideout.mp3',
     displayText: 'Rideout',
