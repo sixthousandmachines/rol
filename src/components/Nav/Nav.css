@@ -1,6 +1,8 @@
 
 
 .nav-item {
+  cursor: pointer;
+  width: 220px;
   margin: 12px;
   padding: 12px;
   display: inline-block;
@@ -8,7 +10,7 @@
   color: #999;
   font-weight: bold;
   background-color: #444;
-  font-size: 24px;
+  font-size: 18px;
   border: 1px solid #900;
   background-image: linear-gradient(to bottom, #444 0%, #222 100%);
   background-image: -o-linear-gradient(to bottom, #444 0%, #222 100%);
@@ -68,4 +70,27 @@
       color-stop(0, #999),
       color-stop(1, #900)
   );
+}
+
+.offcanvas-header{ display:none; }
+
+@media (max-width: 992px) {
+  .offcanvas-header{ display:block; }
+  .navbar-collapse {
+    position: fixed;
+    top:0; 
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: black;
+    transition: visibility .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  }
+  .navbar-collapse.show {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
 }

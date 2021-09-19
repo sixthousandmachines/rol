@@ -1,7 +1,10 @@
 
 
 .playlist-item {
-    width: 600px;
+    cursor: pointer;
+    min-width: 313px;
+    max-width: 600px;
+    overflow: hidden;
     margin: 12px;
     padding: 12px;
     text-decoration: none;
@@ -9,8 +12,8 @@
     color: #999;
     font-weight: bold;
     background-color: #444;
-    padding: 20px 70px;
-    font-size: 18px;
+    padding: 20px 20px;
+    font-size: 14px;
     border: 1px solid #900;
     background-image: linear-gradient(to bottom, #444 0%, #222 100%);
     background-image: -o-linear-gradient(to bottom, #444 0%, #222 100%);
