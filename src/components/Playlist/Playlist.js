@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import './Playlist.css'
 
 export const Playlist = ({ playlist, onSelect }) => {
@@ -8,7 +8,7 @@ export const Playlist = ({ playlist, onSelect }) => {
       <div className='container'>
         {playlist.map((item, index) => {
           return (
-            <div className='row'>
+            <div key={index} className='row'>
               <button key={index} id={item.id} className='playlist-item' onClick={() => onSelect(item.id)}>{item.displayText}</button>
             </div>
           )

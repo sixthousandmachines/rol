@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import './Nav.css'
 
 export const Nav = ({ navItems, selected, onSelect }) => {
@@ -13,7 +13,7 @@ export const Nav = ({ navItems, selected, onSelect }) => {
               computedClass += ' active'
             }
             return (
-              <li className='nav-item'>
+              <li key={index} className='nav-item'>
                 <button key={index} id={name} className={computedClass} onClick={() => onSelect(name)}>{name}</button>
               </li>
             )
