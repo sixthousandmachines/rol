@@ -80,3 +80,8 @@
         color-stop(1, #900)
     );
 }
+
+.playlist-item label {
+    margin: 0;
+    margin-bottom: 6px;
+}

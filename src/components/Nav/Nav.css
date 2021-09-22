@@ -1,6 +1,7 @@
 
 
 .nav-item {
+  vertical-align: middle;
   cursor: pointer;
   width: 220px;
   margin: 12px;
@@ -93,4 +94,8 @@
     visibility: visible;
     transform: translateX(-100%);
   }
+}
+
+.nav-item label {
+  margin: 0;
 }
