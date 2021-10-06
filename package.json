@@ -75,7 +75,8 @@
   "scripts": {
     "start": "standard --fix && node scripts/start.js",
     "build": "standard --fix && node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "prod": "npm run build && serve -s build"
   },
   "eslintConfig": {
     "extends": [
@@ -146,8 +147,31 @@
     "resetMocks": true
   },
   "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-transform-named-capturing-groups-regex",
+        {
+          "runtime": true
+        }
+      ],
+      [
+        "transform-modern-regexp",
+        {
+          "features": [
+            "namedCapturingGroups"
+          ]
+        }
+      ]
+    ],
     "presets": [
       "react-app"
+    ],
+    "exclude": [
+      "**/node_modules"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-named-capturing-groups-regex": "^7.14.9",
+    "babel-plugin-transform-modern-regexp": "0.0.6"
   }
 }
