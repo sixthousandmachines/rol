@@ -37,8 +37,6 @@ export const Nav = ({ navItems }) => {
   return (
     <div className='App-nav'>
       <nav className='nav-container'>
-        <h1 className='nav-title'>Ride Out Lane</h1>
-        
         {/* Mobile Menu Toggle */}
         <button 
           className='nav-toggle'

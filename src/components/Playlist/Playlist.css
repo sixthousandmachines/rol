@@ -58,33 +58,6 @@
     inset 0 1px 0px rgba(255,255,255,0.1);
 }
 
-/* Modern Techy Border Effect - Only on borders */
-.track-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: 
-    linear-gradient(45deg, transparent 30%, rgba(153, 0, 0, 0.3) 50%, transparent 70%),
-    linear-gradient(-45deg, transparent 30%, rgba(153, 0, 0, 0.2) 50%, transparent 70%);
-  background-size: 200% 200%, 200% 200%;
-  animation: borderScan 3s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: 14px;
-}
-
-@keyframes borderScan {
-  0%, 100% { background-position: 0% 0%, 0% 0%; }
-  50% { background-position: 100% 100%, 100% 100%; }
-}
-
-.track-card:hover::before {
-  animation: borderScan 1s ease-in-out infinite;
-}
-
 .track-card:hover {
   transform: translateY(-4px);
   border-color: #999;
@@ -109,7 +82,7 @@
 }
 
 .track-card.selected:hover {
-  background: linear-gradient(135deg, #999 0%, #666 100%);
+  background: linear-gradient(135deg, #555 0%, #333 100%);
   transform: translateY(-4px);
   box-shadow: 
     0 8px 25px rgba(153, 0, 0, 0.5),
@@ -363,22 +336,6 @@
     inset 0 1px 0px rgba(255,255,255,0.1);
 }
 
-.playlist-image {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 1.5rem;
-  border-radius: 50%;
-  box-shadow: 
-    0 6px 20px rgba(153, 0, 0, 0.3),
-    0 3px 0px #900;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
 .playlist-placeholder h2 {
   color: #999;
   font-size: 1.6rem;
@@ -469,12 +426,6 @@
     margin: 0.5rem;
   }
 
-  .playlist-image {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1rem;
-  }
-
   .playlist-placeholder h2 {
     font-size: 1.4rem;
     margin-bottom: 0.75rem;
@@ -542,12 +493,6 @@
     min-height: 35vh;
     padding: 1rem;
     margin: 0.25rem;
-  }
-
-  .playlist-image {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 0.75rem;
   }
 
   .playlist-placeholder h2 {

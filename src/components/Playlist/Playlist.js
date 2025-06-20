@@ -94,7 +94,6 @@ export const Playlist = ({ playlist, djName }) => {
     return (
       <div className='playlist-container'>
         <div className='playlist-placeholder'>
-          <img src={require('../../smiley.gif')} alt="Smiley" className='playlist-image' />
           <h2>Nothing here yet</h2>
           <p>{djName} is cooking up some fresh tracks</p>
         </div>
@@ -124,7 +123,7 @@ export const Playlist = ({ playlist, djName }) => {
           return (
             <div 
               key={track.id} 
-              className={`track-card ${isSelected ? 'track-card-active' : ''}`}
+              className={`track-card ${isSelected || audioState.currentTrackId === track.id ? 'selected' : ''}`}
               onClick={() => handleSelect(track.id)}
             >
               <div className='track-header'>
