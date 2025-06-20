@@ -19,8 +19,8 @@ tasks:
       - aws s3 sync build/ s3://{{.BUCKET_NAME}} --delete --cache-control "public, max-age=31536000"
       # Update HTML files with no-cache
       - aws s3 cp build/index.html s3://{{.BUCKET_NAME}}/index.html --content-type "text/html; charset=utf-8" --cache-control "no-cache, no-store, must-revalidate"
-      # Ensure CSS files have correct content type
-      - aws s3 cp build/static/css/main.995ada08.css s3://{{.BUCKET_NAME}}/static/css/main.995ada08.css --content-type "text/css; charset=utf-8" --cache-control "public, max-age=31536000"
+      # Ensure CSS files have correct content type (using wildcard for dynamic filenames)
+      - aws s3 cp build/static/css/main.*.css s3://{{.BUCKET_NAME}}/static/css/ --content-type "text/css; charset=utf-8" --cache-control "public, max-age=31536000"
 
   deploy:no-build:
     desc: Deploy to S3 bucket without building

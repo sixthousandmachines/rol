@@ -148,6 +148,9 @@ The app supports bookmarkable URLs for easy sharing and navigation:
 - ✅ **Browser Navigation** - Use back/forward buttons
 - ✅ **Home Navigation** - Easy return to main page
 - ✅ **URL Encoding** - Handles special characters in DJ names
+- ✅ **Case-Insensitive URLs** - Works with any case combination (e.g., `/Decksimus`, `/decksimus`, `/DECKSIMUS`)
+- ✅ **Server-Side Routing** - Direct URL access works without 404 errors
+- ✅ **404 Handling** - Friendly error messages for invalid DJ names
 
 ## 🔒 AWS Configuration
 
@@ -155,6 +158,20 @@ The app uses AWS Cognito Identity Pool for secure access to S3:
 - **Region:** us-east-1
 - **Bucket:** media.rideoutlane.com
 - **Identity Pool:** us-east-1:d78ad54c-3a62-4e9a-9549-f203580ba151
+
+## 🌐 Server Configuration
+
+For proper client-side routing support, the hosting server must be configured to serve `index.html` for all routes. This project includes:
+
+### Netlify Configuration
+- `public/_redirects` - Redirects all routes to `index.html` for client-side routing
+- This enables direct URL access to DJ pages without 404 errors
+
+### Alternative Hosting
+For other hosting providers (AWS S3, Vercel, etc.), configure:
+- **Error Pages:** Set 404.html to redirect to index.html
+- **Routing Rules:** Serve index.html for all non-file routes
+- **SPA Support:** Enable single-page application routing
 
 ## 🎨 Modern Features
 

@@ -76,3 +76,19 @@ button:focus {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.error-container {
+  padding: 40px 20px;
+  text-align: center;
+  color: #444;
+}
+
+.error-container h2 {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.error-container p {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}

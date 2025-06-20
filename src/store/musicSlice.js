@@ -209,7 +209,8 @@ const musicSlice = createSlice({
         const djNameMap = {}
         artists.forEach(name => {
           const cleanName = name.replace(/\s+/g, '')
-          djNameMap[cleanName] = name
+          // Store with lowercase key for case-insensitive lookup
+          djNameMap[cleanName.toLowerCase()] = name
         })
 
         state.djNameMap = djNameMap

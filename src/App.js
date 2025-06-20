@@ -5,9 +5,7 @@ import {
   Routes, 
   Route, 
   useParams, 
-  Outlet,
-  UNSAFE_DataRouterContext,
-  UNSAFE_DataRouterStateContext
+  Outlet
 } from 'react-router-dom'
 import { store } from './store'
 import { useAppDispatch, useAppSelector } from './store/hooks'
@@ -70,14 +68,25 @@ const DJPage = () => {
   const { playlist, djNameMap } = useAppSelector(state => state.music)
 
   useEffect(() => {
-    if (djName && djNameMap[djName]) {
-      // Use the original name from our mapping
-      dispatch(setArtist(djNameMap[djName]))
+    if (djName && djNameMap[djName.toLowerCase()]) {
+      // Use the original name from our mapping (case-insensitive lookup)
+      dispatch(setArtist(djNameMap[djName.toLowerCase()]))
     }
   }, [djName, djNameMap, dispatch])
 
-  // Use the original DJ name for display
-  const originalDjName = djName ? djNameMap[djName] : ''
+  // Use the original DJ name for display (case-insensitive lookup)
+  const originalDjName = djName ? djNameMap[djName.toLowerCase()] : ''
+
+  // Show error if DJ not found
+  if (djName && !originalDjName) {
+    return (
+      <div className='error-container'>
+        <h2>DJ Not Found</h2>
+        <p>Sorry, we couldn't find a DJ named "{djName}".</p>
+        <p>Please check the URL or browse our available DJs from the navigation.</p>
+      </div>
+    )
+  }
 
   return <Playlist playlist={playlist} djName={originalDjName} />
 }
