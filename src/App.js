@@ -1,57 +1,85 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
+import { Provider } from 'react-redux'
+import { 
+  BrowserRouter as Router, 
+  Routes, 
+  Route, 
+  useParams, 
+  Outlet,
+  UNSAFE_DataRouterContext,
+  UNSAFE_DataRouterStateContext
+} from 'react-router-dom'
+import { store } from './store'
+import { useAppDispatch, useAppSelector } from './store/hooks'
+import { fetchMusicCatalog, setArtist } from './store/musicSlice'
 import './App.css'
-// import logo from './biohazard.gif'
 import { Nav } from './components/Nav/Nav'
 import { Player } from './components/Player/Player'
 import { Playlist } from './components/Playlist/Playlist'
-import Store from './stores/Store'
 
-let self
+// 1. App Wrapper with Provider
+const AppWrapper = () => (
+  <Provider store={store}>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path='/:djName' element={<DJPage />} />
+        </Route>
+      </Routes>
+    </Router>
+  </Provider>
+)
 
-class App extends Component {
-  constructor (props) {
-    super(props)
-    this.onSelect = this.onSelect.bind(this)
-    this.state = {
-      page: Store.getPage()
-    }
-    self = this
-  }
+// 2. Main Layout Component
+const Layout = () => {
+  const dispatch = useAppDispatch()
+  const { navItems, loading, error } = useAppSelector(state => state.music)
 
-  componentDidMount () {
-    Store.subscribe('APP', this.onSelectCallback)
-  }
+  useEffect(() => {
+    dispatch(fetchMusicCatalog())
+  }, [dispatch])
 
-  componentWillUnmount () {
-    Store.unsubscribe('APP')
-  }
-
-  onNavigation (e) {
-    Store.setArtist(e)
-  }
-
-  onSelect (e) {
-    Store.setSelection(e)
-  }
-
-  onSelectCallback (page) {
-    self.setState({
-      page
-    })
-  }
-
-  render () {
-    return (
-      <div className='App'>
-        {/* <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-        </header> */}
-        <Nav navItems={self.state.page.navItems} selected={self.state.page.navSelected} handleSelect={self.onNavigation} />
-        <Playlist playlist={self.state.page.playlist} selected={self.state.page.trackSelected} handleSelect={self.onSelect} />
-        <Player playerlist={self.state.page.playerlist} />
+  return (
+    <div className='App'>
+      <header className='App-header'>
+        <h1>rideoutlane</h1>
+      </header>
+      <Nav navItems={navItems} />
+      <div className='content'>
+        {loading && <p className='loading-text'>Loading Music...</p>}
+        {error && <p className='error-text'>Error: {error}</p>}
+        {!loading && !error && <Outlet />}
       </div>
-    )
-  }
+      <Player />
+    </div>
+  )
 }
 
-export default App
+// 3. Home Page Component
+const Home = () => (
+  <div className='home-placeholder'>
+    <h2>Select a DJ to begin</h2>
+  </div>
+)
+
+// 4. DJ Page Component
+const DJPage = () => {
+  const { djName } = useParams()
+  const dispatch = useAppDispatch()
+  const { playlist, djNameMap } = useAppSelector(state => state.music)
+
+  useEffect(() => {
+    if (djName && djNameMap[djName]) {
+      // Use the original name from our mapping
+      dispatch(setArtist(djNameMap[djName]))
+    }
+  }, [djName, djNameMap, dispatch])
+
+  // Use the original DJ name for display
+  const originalDjName = djName ? djNameMap[djName] : ''
+
+  return <Playlist playlist={playlist} djName={originalDjName} />
+}
+
+export default AppWrapper

@@ -1,3 +1,120 @@
-# rol
+# ROL - Rideout Lane Music Player
 
-rideoutlane - a place to listen to music
+A modern React-based music streaming application that fetches and plays audio files from AWS S3.
+
+## 🚀 Features
+
+- **Modern React 18** with functional components and hooks
+- **Redux Toolkit** for state management
+- **React Router** for bookmarkable DJ pages
+- **AWS S3 Integration** for music storage and streaming
+- **Modern Audio Player** with:
+  - Seeking functionality
+  - Progress bar
+  - Play/Pause controls
+  - Download capability
+  - Material Icons integration
+- **Responsive Design** for mobile and desktop
+- **Loading States** and error handling
+- **Artist Navigation** and track selection
+- **Bookmarkable URLs** for favorite DJs
+
+## 🛠 Tech Stack
+
+- **React 18.3.1** - Latest React with modern patterns
+- **Redux Toolkit 2.2.1** - Modern state management
+- **React Router DOM 6.28.0** - Client-side routing
+- **AWS SDK v3** - S3 and Cognito integration
+- **Material Icons** - Modern icon system
+- **React Scripts 5.0.1** - Latest build tools
+
+## 🏃‍♂️ Getting Started
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start the development server:**
+   ```bash
+   npm start
+   ```
+
+3. **Open your browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📁 Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── Nav/            # Navigation component
+│   ├── Player/         # Audio player component with seeking
+│   └── Playlist/       # Track list component with downloads
+├── store/              # Redux store
+│   ├── index.js        # Store configuration
+│   ├── musicSlice.js   # Music state management
+│   └── hooks.js        # Redux hooks
+├── App.js              # Main app component
+└── index.js            # App entry point
+```
+
+## 🔧 Available Scripts
+
+- `npm start` - Start development server
+- `npm build` - Build for production
+- `npm test` - Run tests
+- `npm run lint` - Check code quality
+- `npm run lint:fix` - Fix linting issues
+- `npm run format` - Format code with Prettier
+
+## 🎵 How It Works
+
+1. **Catalog Loading** - App fetches music catalog from AWS S3
+2. **Artist Selection** - Users can browse by artist/DJ
+3. **Track Selection** - Select individual tracks to play
+4. **Audio Playback** - Modern audio player with:
+   - Seeking functionality
+   - Progress bar updates
+   - Download capability
+   - Material Icons
+   - Proper metadata handling
+
+## 🌐 Routing & URLs
+
+The app supports bookmarkable URLs for easy sharing and navigation:
+
+- **Home Page:** `http://localhost:3000/`
+- **DJ Pages:** `http://localhost:3000/[dj-name]`
+- **Examples:**
+  - `http://localhost:3000/DJ%20Name` (URL encoded)
+  - `http://localhost:3000/My%20Favorite%20DJ`
+
+### Features:
+- ✅ **Bookmarkable URLs** - Save your favorite DJ pages
+- ✅ **Direct Links** - Share specific DJ pages with friends
+- ✅ **Browser Navigation** - Use back/forward buttons
+- ✅ **Home Navigation** - Easy return to main page
+- ✅ **URL Encoding** - Handles special characters in DJ names
+
+## 🔒 AWS Configuration
+
+The app uses AWS Cognito Identity Pool for secure access to S3:
+- **Region:** us-east-1
+- **Bucket:** media.rideoutlane.com
+- **Identity Pool:** us-east-1:d78ad54c-3a62-4e9a-9549-f203580ba151
+
+## 🎨 Modern Features
+
+- **Loading States** - Visual feedback during data fetching
+- **Error Handling** - Graceful error display and retry functionality
+- **Responsive Design** - Works on all device sizes
+- **Modern UI** - Clean, gradient-based design with glassmorphism effects
+- **Type Safety** - Better development experience with proper typing
+- **Fixed Player** - Audio controls always visible at bottom
+- **URL Routing** - Bookmarkable pages for each DJ
+- **Material Icons** - Professional icon system
+- **Download Support** - Direct track downloads
+- **Seeking** - Precise audio position control
+- **Progress Bars** - Visual playback progress
+- **Metadata Handling** - Proper audio metadata management
