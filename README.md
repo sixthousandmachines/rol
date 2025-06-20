@@ -27,6 +27,7 @@ A modern React-based music streaming application that fetches and plays audio fi
 - **AWS SDK v3** - S3 and Cognito integration
 - **Material Icons** - Modern icon system
 - **React Scripts 5.0.1** - Latest build tools
+- **Task** - Task runner for deployment automation
 
 ## 🏃‍♂️ Getting Started
 
@@ -43,6 +44,56 @@ A modern React-based music streaming application that fetches and plays audio fi
 3. **Open your browser:**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
+## 🚀 Deployment
+
+This project uses [Task](https://taskfile.dev/) for deployment automation to AWS S3.
+
+### Prerequisites
+
+1. **Install Task CLI:**
+   ```bash
+   # Windows (using Scoop)
+   scoop install task
+   
+   # macOS (using Homebrew)
+   brew install go-task
+   
+   # Linux
+   sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
+   ```
+
+2. **Configure AWS CLI:**
+   ```bash
+   aws configure
+   ```
+
+### Available Tasks
+
+- `task build` - Build the React application
+- `task deploy` - Build and deploy to S3
+- `task deploy:no-build` - Deploy without rebuilding
+- `task clean:bucket` - Remove all files from S3 bucket
+- `task list:bucket` - List contents of S3 bucket
+- `task check:bucket` - Check S3 bucket configuration
+- `task setup:bucket` - Configure bucket for static website hosting
+
+### Deploy to Production
+
+```bash
+# Build and deploy
+task deploy
+
+# Deploy without rebuilding (if you just want to sync changes)
+task deploy:no-build
+```
+
+### AWS Configuration
+
+- **Website Bucket:** rideoutlane.com
+- **Media Bucket:** media.rideoutlane.com
+- **Region:** us-east-1
+- **CORS:** Configured for cross-origin requests between buckets
+
 ## 📁 Project Structure
 
 ```
@@ -57,6 +108,7 @@ src/
 │   └── hooks.js        # Redux hooks
 ├── App.js              # Main app component
 └── index.js            # App entry point
+Taskfile.yml            # Deployment automation
 ```
 
 ## 🔧 Available Scripts
