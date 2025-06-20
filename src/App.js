@@ -57,7 +57,9 @@ const Layout = () => {
 // 3. Home Page Component
 const Home = () => (
   <div className='home-placeholder'>
-    <h2>Select a DJ to begin</h2>
+    <img src={require('./biohazard.gif')} alt="Biohazard" className='home-image' />
+    <h2>Pick your poison</h2>
+    <p>Choose your DJ</p>
   </div>
 )
 

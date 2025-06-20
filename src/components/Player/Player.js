@@ -200,7 +200,12 @@ export const Player = () => {
     
     const audio = audioRef.current
     if (!audio || !isMetadataLoaded) {
-      console.log('Cannot seek: audio not ready or metadata not loaded')
+      console.log('Cannot seek: audio not ready or metadata not loaded', {
+        audio: !!audio,
+        isMetadataLoaded,
+        duration: audio?.duration,
+        currentTime: audio?.currentTime
+      })
       return
     }
 
@@ -216,13 +221,16 @@ export const Player = () => {
       percentage, 
       duration: audio.duration,
       seekTime,
-      isMetadataLoaded
+      isMetadataLoaded,
+      localTime,
+      localDuration
     })
     
     try {
       audio.currentTime = seekTime
       setLocalTime(seekTime)
       dispatch(setAudioTime(seekTime))
+      console.log('Seek successful:', seekTime)
     } catch (error) {
       console.error('Error seeking:', error)
     }
@@ -258,6 +266,18 @@ export const Player = () => {
   }
 
   const progressPercentage = localDuration > 0 ? (localTime / localDuration) * 100 : 0
+
+  console.log('Progress bar debug:', {
+    localTime,
+    localDuration,
+    progressPercentage,
+    isMetadataLoaded,
+    audioState: {
+      currentTime: audioState.currentTime,
+      duration: audioState.duration,
+      isPlaying: audioState.isPlaying
+    }
+  })
 
   return (
     <div className='App-player'>

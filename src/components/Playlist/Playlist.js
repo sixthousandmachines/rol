@@ -94,7 +94,9 @@ export const Playlist = ({ playlist, djName }) => {
     return (
       <div className='playlist-container'>
         <div className='playlist-placeholder'>
-          <p>No tracks found for this DJ</p>
+          <img src={require('../../smiley.gif')} alt="Smiley" className='playlist-image' />
+          <h2>Nothing here yet</h2>
+          <p>{djName} is cooking up some fresh tracks</p>
         </div>
       </div>
     )
